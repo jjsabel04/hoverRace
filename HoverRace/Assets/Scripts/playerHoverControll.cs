@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,14 +13,14 @@ public class playerHoverControll : MonoBehaviour
     [Space(5)]
     [Header("Hoverboard Points")]
     [SerializeField] private Transform __corners;
+    [SerializeField] private GameObject __Orientaion;
 
     #region Private Vars
-    private bool groundLevel;
-    private Rigidbody __rb;
-    private float __upForce = 1;
+        private bool groundLevel;
+        private Rigidbody __rb;
+        private float __upForce = 1;
     #endregion
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         __rb = GetComponent<Rigidbody>();
@@ -29,7 +30,11 @@ public class playerHoverControll : MonoBehaviour
         __corners.GetChild(3).position = new Vector3(transform.position.x - transform.localScale.x/2,transform.position.y, transform.position.z - transform.localScale.z/2);
     }
 
-    // Update is called once per frame
+    private void Update()
+    {
+        
+    }
+
     void FixedUpdate()
     {
         groundLevel = false;
@@ -61,19 +66,19 @@ public class playerHoverControll : MonoBehaviour
             __rb.angularDrag = 7;
             if (Input.GetKey(KeyCode.W))
             {
-                __rb.AddForce(transform.forward * __speed);
+                __rb.AddForce(transform.forward.normalized * __speed);
             }
             if (Input.GetKey(KeyCode.A))
             {
-                __rb.AddForce(transform.right * -__speed);
+                __rb.AddForce(transform.right.normalized * -__speed);
             }
             if (Input.GetKey(KeyCode.S))
             {
-                __rb.AddForce(transform.forward * -__speed);
+                __rb.AddForce(transform.forward.normalized * -__speed);
             }
             if (Input.GetKey(KeyCode.D))
             {
-                __rb.AddForce(transform.right * __speed);
+                __rb.AddForce(transform.right.normalized * __speed);
             }
         }
         else
