@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class playerHoverControll : MonoBehaviour
 {
+    [Header("Hoverboard Properties")]
+    [SerializeField] private float __speed = 2;
+    [SerializeField] private float __rotSpeed = 10f;
+    [SerializeField] private float __levelForce = 150f;
+    [SerializeField] private float hoverDist = 1;
+    [Space(5)]
+    [Header("Hoverboard Points")]
+    [SerializeField] private Transform __corners;
 
+    #region Private Vars
+    private bool groundLevel;
     private Rigidbody __rb;
     private float __upForce = 1;
-    [SerializeField] private float __speed = 2;
-    [SerializeField] private Transform __corners;
-    [SerializeField] private float __levelForce = 150f;
-
-    [SerializeField] private float hoverDist = 1;
-
-    private bool groundLevel;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        
         __rb = GetComponent<Rigidbody>();
         __corners.GetChild(0).position = new Vector3(transform.position.x + transform.localScale.x/2,transform.position.y, transform.position.z + transform.localScale.z/2);
         __corners.GetChild(1).position = new Vector3(transform.position.x + transform.localScale.x/2,transform.position.y, transform.position.z - transform.localScale.z/2);
@@ -47,6 +50,10 @@ public class playerHoverControll : MonoBehaviour
                 
             }
         }
+
+
+        __rb.AddTorque(0, Input.GetAxisRaw("Mouse X") * __rotSpeed, 0);
+
 
         if (groundLevel)
         {
