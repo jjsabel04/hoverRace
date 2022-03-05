@@ -12,6 +12,11 @@ public class playerHoverControll : MonoBehaviour
     [SerializeField] private float hoverDist = 1;
     [SerializeField] private float Stability = 0.3f;
     [SerializeField] private float Stabilityspeed = 2.0f;
+    [Header("Sound")]
+    [SerializeField] private float EngineAcceleration = 10f;
+    [SerializeField] private float minEngineSound = .05f;
+    [SerializeField] private float maxEngineSound = .6f;
+    [SerializeField] private AudioSource _shipSound;
     [Space(5)]
     [Header("Hoverboard Points")]
     [SerializeField] private Transform __corners;
@@ -21,10 +26,11 @@ public class playerHoverControll : MonoBehaviour
         private bool groundLevel;
         private Rigidbody __rb;
         private float __upForce = 1;
-    #endregion
+        #endregion
     
     void Start()
     {
+        _shipSound.Play();  
         __rb = GetComponent<Rigidbody>();
         __corners.GetChild(0).position = new Vector3(transform.position.x + transform.localScale.x/2,transform.position.y, transform.position.z + transform.localScale.z/2);
         __corners.GetChild(1).position = new Vector3(transform.position.x + transform.localScale.x/2,transform.position.y, transform.position.z - transform.localScale.z/2);
@@ -39,6 +45,9 @@ public class playerHoverControll : MonoBehaviour
          ) * transform.up;
          Vector3 torqueVector = Vector3.Cross(predictedUp, Vector3.up);
          __rb.AddTorque(torqueVector * Stabilityspeed * Stabilityspeed);
+         
+         _shipSound.pitch = Mathf.Clamp(__rb.velocity.magnitude / 
+                                        EngineAcceleration , minEngineSound, maxEngineSound);
      }
     
 
