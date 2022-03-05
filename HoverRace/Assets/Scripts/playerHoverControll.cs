@@ -13,7 +13,7 @@ public class playerHoverControll : MonoBehaviour
     [Space(5)]
     [Header("Hoverboard Points")]
     [SerializeField] private Transform __corners;
-    [SerializeField] private GameObject __Orientaion;
+    [SerializeField] private Transform __Orientaion;
 
     #region Private Vars
         private bool groundLevel;
@@ -29,11 +29,7 @@ public class playerHoverControll : MonoBehaviour
         __corners.GetChild(2).position = new Vector3(transform.position.x - transform.localScale.x/2,transform.position.y, transform.position.z + transform.localScale.z/2);
         __corners.GetChild(3).position = new Vector3(transform.position.x - transform.localScale.x/2,transform.position.y, transform.position.z - transform.localScale.z/2);
     }
-
-    private void Update()
-    {
-        
-    }
+    
 
     void FixedUpdate()
     {
@@ -66,19 +62,19 @@ public class playerHoverControll : MonoBehaviour
             __rb.angularDrag = 7;
             if (Input.GetKey(KeyCode.W))
             {
-                __rb.AddForce(transform.forward.normalized * __speed);
+                __rb.AddForce(__Orientaion.forward.normalized * __speed);
             }
             if (Input.GetKey(KeyCode.A))
             {
-                __rb.AddForce(transform.right.normalized * -__speed);
+                __rb.AddForce(__Orientaion.right.normalized * -__speed);
             }
             if (Input.GetKey(KeyCode.S))
             {
-                __rb.AddForce(transform.forward.normalized * -__speed);
+                __rb.AddForce(__Orientaion.forward.normalized * -__speed);
             }
             if (Input.GetKey(KeyCode.D))
             {
-                __rb.AddForce(transform.right.normalized * __speed);
+                __rb.AddForce(__Orientaion.right.normalized * __speed);
             }
         }
         else
