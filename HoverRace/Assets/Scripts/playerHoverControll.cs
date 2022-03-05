@@ -5,72 +5,74 @@ using UnityEngine;
 public class playerHoverControll : MonoBehaviour
 {
 
-    private Rigidbody rb;
-    private float upForce = 1;
-    public float speed = 2;
-    public Transform corners;
+    private Rigidbody __rb;
+    private float __upForce = 1;
+    [SerializeField] private float __speed = 2;
+    [SerializeField] private Transform __corners;
+    [SerializeField] private float __levelForce = 150f;
 
-    private float hoverDist = 1;
+    [SerializeField] private float hoverDist = 1;
 
     private bool groundLevel;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        corners.GetChild(0).position = new Vector3(transform.position.x + transform.localScale.x/2,transform.position.y, transform.position.z + transform.localScale.z/2);
-        corners.GetChild(1).position = new Vector3(transform.position.x + transform.localScale.x/2,transform.position.y, transform.position.z - transform.localScale.z/2);
-        corners.GetChild(2).position = new Vector3(transform.position.x - transform.localScale.x/2,transform.position.y, transform.position.z + transform.localScale.z/2);
-        corners.GetChild(3).position = new Vector3(transform.position.x - transform.localScale.x/2,transform.position.y, transform.position.z - transform.localScale.z/2);
-
+        
+        __rb = GetComponent<Rigidbody>();
+        __corners.GetChild(0).position = new Vector3(transform.position.x + transform.localScale.x/2,transform.position.y, transform.position.z + transform.localScale.z/2);
+        __corners.GetChild(1).position = new Vector3(transform.position.x + transform.localScale.x/2,transform.position.y, transform.position.z - transform.localScale.z/2);
+        __corners.GetChild(2).position = new Vector3(transform.position.x - transform.localScale.x/2,transform.position.y, transform.position.z + transform.localScale.z/2);
+        __corners.GetChild(3).position = new Vector3(transform.position.x - transform.localScale.x/2,transform.position.y, transform.position.z - transform.localScale.z/2);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        groundLevel = false;
         for (int i = 0; i < 4; i++)
         {
             RaycastHit hit;
-            if (Physics.Raycast(corners.GetChild(i).position, transform.TransformDirection(Vector3.down), out hit, hoverDist))
+            if (Physics.Raycast(__corners.GetChild(i).position, transform.TransformDirection(Vector3.down), out hit, hoverDist))
             {
-                Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
-                upForce = (hoverDist - hit.distance) * 100;
+                Debug.DrawRay(__corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
+                __upForce = (hoverDist - hit.distance) * __levelForce;
                 //rb.AddForce(Vector3.up * upForce);
-                rb.AddForceAtPosition(Vector3.up * upForce, corners.GetChild(i).position);
+                __rb.AddForceAtPosition(Vector3.up * __upForce, __corners.GetChild(i).position);
                 groundLevel = true;
             }
             else
             {
-                Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hoverDist, Color.white);
-                groundLevel = false;
+                Debug.DrawRay(__corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hoverDist, Color.white);
+                
             }
         }
 
-        if (groundLevel == true)
+        if (groundLevel)
         {
-            rb.drag = 7;
-            rb.angularDrag = 7;
+            __rb.drag = 7;
+            __rb.angularDrag = 7;
             if (Input.GetKey(KeyCode.W))
             {
-                rb.AddForce(transform.forward * speed);
+                __rb.AddForce(transform.forward * __speed);
             }
             if (Input.GetKey(KeyCode.A))
             {
-                rb.AddForce(transform.right * -speed);
+                __rb.AddForce(transform.right * -__speed);
             }
             if (Input.GetKey(KeyCode.S))
             {
-                rb.AddForce(transform.forward * -speed);
+                __rb.AddForce(transform.forward * -__speed);
             }
             if (Input.GetKey(KeyCode.D))
             {
-                rb.AddForce(transform.right * speed);
+                __rb.AddForce(transform.right * __speed);
             }
         }
         else
         {
-            rb.drag = .01f;
-            rb.angularDrag = .01f;
+            __rb.drag = .01f;
+            __rb.angularDrag = .01f;
         }
     }
 }
