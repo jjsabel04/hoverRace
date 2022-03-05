@@ -160,6 +160,8 @@ MonoBehaviour:
   __rotSpeed: 250
   __levelForce: 150
   hoverDist: 1
+  Stability: 0.3
+  Stabilityspeed: 2
   __corners: {fileID: 783109918}
   __Orientaion: {fileID: 609045144}
 --- !u!65 &102950678
@@ -857,7 +859,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9858044, y: 1}
+    m_SensorSize: {x: 2.195855, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

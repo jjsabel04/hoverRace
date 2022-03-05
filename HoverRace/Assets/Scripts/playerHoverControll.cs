@@ -10,6 +10,8 @@ public class playerHoverControll : MonoBehaviour
     [SerializeField] private float __rotSpeed = 10f;
     [SerializeField] private float __levelForce = 150f;
     [SerializeField] private float hoverDist = 1;
+    [SerializeField] private float Stability = 0.3f;
+    [SerializeField] private float Stabilityspeed = 2.0f;
     [Space(5)]
     [Header("Hoverboard Points")]
     [SerializeField] private Transform __corners;
@@ -29,6 +31,15 @@ public class playerHoverControll : MonoBehaviour
         __corners.GetChild(2).position = new Vector3(transform.position.x - transform.localScale.x/2,transform.position.y, transform.position.z + transform.localScale.z/2);
         __corners.GetChild(3).position = new Vector3(transform.position.x - transform.localScale.x/2,transform.position.y, transform.position.z - transform.localScale.z/2);
     }
+   
+     void LateUpdate () {
+         Vector3 predictedUp = Quaternion.AngleAxis(
+             __rb.angularVelocity.magnitude * Mathf.Rad2Deg * Stability / Stabilityspeed,
+             __rb.angularVelocity
+         ) * transform.up;
+         Vector3 torqueVector = Vector3.Cross(predictedUp, Vector3.up);
+         __rb.AddTorque(torqueVector * Stabilityspeed * Stabilityspeed);
+     }
     
 
     void FixedUpdate()
