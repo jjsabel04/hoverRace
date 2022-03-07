@@ -22,8 +22,11 @@ public class playerHoverControll : MonoBehaviour
     [SerializeField] private Transform __corners;
     [SerializeField] private Transform __Orientaion;
 
+
     #region Private Vars
         private bool groundLevel;
+        private float timeUngrounded;
+        private bool inAir = true;
         private Rigidbody __rb;
         private float __upForce = 1;
         #endregion
@@ -39,6 +42,7 @@ public class playerHoverControll : MonoBehaviour
     }
    
      void LateUpdate () {
+         // this stability feature makes landing tricks alot easier, at this point i have fixed the previous problem by other means that work in all situations and so stabilization may be used as a feature for an easier mode
          Vector3 predictedUp = Quaternion.AngleAxis(
              __rb.angularVelocity.magnitude * Mathf.Rad2Deg * Stability / Stabilityspeed,
              __rb.angularVelocity
@@ -46,6 +50,7 @@ public class playerHoverControll : MonoBehaviour
          Vector3 torqueVector = Vector3.Cross(predictedUp, Vector3.up);
          __rb.AddTorque(torqueVector * Stabilityspeed * Stabilityspeed);
          
+
          _shipSound.pitch = Mathf.Clamp(__rb.velocity.magnitude / 
                                         EngineAcceleration , minEngineSound, maxEngineSound);
      }
@@ -72,11 +77,17 @@ public class playerHoverControll : MonoBehaviour
             }
         }
 
-
-        __rb.AddTorque(0, Input.GetAxisRaw("Mouse X") * __rotSpeed, 0);
-
-
-        if (groundLevel)
+        if (groundLevel == false)
+        {
+            __rb.drag = 0;
+            __rb.angularDrag = 3;
+            timeUngrounded += Time.deltaTime;
+            if (timeUngrounded >= .5f)
+            {
+                inAir = true;
+            }
+        }
+        else
         {
             __rb.drag = 7;
             __rb.angularDrag = 7;
@@ -96,11 +107,33 @@ public class playerHoverControll : MonoBehaviour
             {
                 __rb.AddForce(__Orientaion.right.normalized * __speed);
             }
+            inAir = false;
+            //__rb.AddTorque(0, Input.GetAxisRaw("Mouse X") * __rotSpeed, 0);
+            timeUngrounded = 0;
         }
-        else
+
+        //__rb.AddTorque(0, Input.GetAxisRaw("Mouse X") * __rotSpeed, 0);
+        __rb.AddTorque(__Orientaion.up.normalized * Input.GetAxisRaw("Mouse X") * __rotSpeed);
+
+        if (inAir)
         {
-            __rb.drag = .01f;
-            __rb.angularDrag = .01f;
+            
+            if (Input.GetKey(KeyCode.W))
+            {
+                __rb.AddTorque(__Orientaion.right.normalized * __speed);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                __rb.AddTorque(__Orientaion.forward.normalized * __speed);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                __rb.AddTorque(__Orientaion.right.normalized * -__speed);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                __rb.AddTorque(__Orientaion.forward.normalized * -__speed);
+            }
         }
     }
 }
