@@ -12,7 +12,7 @@ public class FollowTargetAI : MonoBehaviour
  
     void Update()
     {
-        //transform.LookAt(Player);
+        transform.LookAt(Player);
         if (Vector3.Distance(transform.position, Player.position) >= MinDistance)
         {
             Vector3 follow = Player.position;
