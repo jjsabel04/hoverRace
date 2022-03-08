@@ -28,10 +28,10 @@ public class playerHoverControll : MonoBehaviour
 
     #region Private Vars
         private bool _groundLevel;
-        private float _timeUngrounded;
         private bool _inAir = true;
         private Rigidbody _rigidbody;
         private float _upForce = 1;
+        private bool _stabilizing;
         #endregion
 
     private void Awake()
@@ -47,8 +47,16 @@ public class playerHoverControll : MonoBehaviour
    
      private void LateUpdate ()
      {
-         HandleStabalisation();
-         HandleAudio();
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+        {
+            _stabilizing = true;
+            HandleStabalisation();
+        }
+        else
+        {
+            _stabilizing = false;
+        }
+        HandleAudio();
      }
     
 
@@ -85,36 +93,29 @@ public class playerHoverControll : MonoBehaviour
 
     void HandleInputAndHovering()
     {
-                _groundLevel = false;
+        _groundLevel = false;
+        _inAir = false;
         for (int i = 0; i < 4; i++)
         {
             RaycastHit hit;
-            if (Physics.Raycast(corners.GetChild(i).position, transform.TransformDirection(Vector3.down), out hit, hoverDist))
+            if (Physics.Raycast(corners.GetChild(i).position, transform.TransformDirection(Vector3.down), out hit, hoverDist + 2))
             {
-                Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
-                _upForce = (hoverDist - hit.distance) * levelForce;
-                //rb.AddForce(Vector3.up * upForce);
-                _rigidbody.AddForceAtPosition(Vector3.up * _upForce, corners.GetChild(i).position);
-                _groundLevel = true;
+                if(hit.distance < hoverDist)
+                {
+                    Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
+                    _upForce = (hoverDist - hit.distance) * levelForce;
+                    _rigidbody.AddForceAtPosition(Vector3.up * _upForce, corners.GetChild(i).position);
+                    _groundLevel = true;
+                }
             }
             else
             {
                 Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hoverDist, Color.white);
-                
-            }
-        }
-
-        if (_groundLevel == false)
-        {
-            _rigidbody.drag = 0;
-            _rigidbody.angularDrag = 3;
-            _timeUngrounded += Time.deltaTime;
-            if (_timeUngrounded >= .5f)
-            {
                 _inAir = true;
             }
         }
-        else
+
+        if (_groundLevel)
         {
             _rigidbody.drag = 7;
             _rigidbody.angularDrag = 7;
@@ -134,15 +135,17 @@ public class playerHoverControll : MonoBehaviour
             {
                 _rigidbody.AddForce(orientation.right.normalized * speed);
             }
-            _inAir = false;
-            //__rb.AddTorque(0, Input.GetAxisRaw("Mouse X") * __rotSpeed, 0);
-            _timeUngrounded = 0;
         }
-
-        //__rb.AddTorque(0, Input.GetAxisRaw("Mouse X") * __rotSpeed, 0);
+        else
+        {
+            _rigidbody.drag = 0;
+            _rigidbody.angularDrag = 3;
+        }
+        
+        
         _rigidbody.AddTorque(orientation.up.normalized * Input.GetAxisRaw("Mouse X") * rotSpeed);
 
-        if (_inAir)
+        if (_inAir && !_stabilizing)
         {
             
             if (Input.GetKey(KeyCode.W))
