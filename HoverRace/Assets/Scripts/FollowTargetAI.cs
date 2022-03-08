@@ -5,8 +5,8 @@ using UnityEngine;
 public class FollowTargetAI : MonoBehaviour
 {
     public float MinDistance = 3;
-    public float MaxDistance = 1;
     public float Speed = 3;
+    public float damping = 3;
     public Transform Player;
  
  
@@ -19,7 +19,7 @@ public class FollowTargetAI : MonoBehaviour
            
             follow.y = this.transform.position.y;
             
-            this.transform.position = Vector3.MoveTowards(this.transform.position, follow, Speed * Time.deltaTime);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, follow, Speed * Time.deltaTime * damping);
         }
     }
 }
