@@ -48,7 +48,7 @@ public class playerHoverControll : MonoBehaviour
              __rb.angularVelocity
          ) * transform.up;
          Vector3 torqueVector = Vector3.Cross(predictedUp, Vector3.up);
-         __rb.AddTorque(torqueVector * Stabilityspeed * Stabilityspeed);
+         __rb.AddTorque(torqueVector * Stabilityspeed);
          
 
          _shipSound.pitch = Mathf.Clamp(__rb.velocity.magnitude / 
