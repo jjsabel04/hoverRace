@@ -156,9 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e24a19e39cdf0b498e879fb9cd46b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4000
+  speed: 3500
   rotSpeed: 250
-  levelForce: 300
+  levelForce: 250
   hoverDist: 1.2
   stability: 0.3
   stabilitySpeed: 2
