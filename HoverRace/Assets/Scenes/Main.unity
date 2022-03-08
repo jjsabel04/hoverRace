@@ -1663,8 +1663,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinDistance: 3
-  MaxDistance: 1
   Speed: 6
+  damping: 1
   Player: {fileID: 721629442}
 --- !u!4 &606486699
 Transform:
