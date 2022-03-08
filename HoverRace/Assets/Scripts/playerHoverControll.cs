@@ -98,7 +98,7 @@ public class playerHoverControll : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             RaycastHit hit;
-            if (Physics.Raycast(corners.GetChild(i).position, transform.TransformDirection(Vector3.down), out hit, hoverDist + 2))
+            if (Physics.Raycast(corners.GetChild(i).position, transform.TransformDirection(Vector3.down), out hit, hoverDist + 3))
             {
                 if(hit.distance < hoverDist)
                 {
