@@ -14,7 +14,6 @@ public class playerHoverControll : MonoBehaviour
     [SerializeField] private float hoverDist = 1;
     [SerializeField] private float stability = 0.3f;
     [SerializeField] private float stabilitySpeed = 2.0f;
-    [SerializeField] private float jumpForce = 2.0f;
     [Header("Sound")]
     [SerializeField] private float engineAcceleration = 10f;
     [SerializeField] private float minEngineSound = .05f;
@@ -116,11 +115,6 @@ public class playerHoverControll : MonoBehaviour
                 Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hoverDist, Color.white);
                 _inAir = true;
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _rigidbody.AddExplosionForce(jumpForce, transform.position, 1f);
         }
 
         if (_groundLevel)
