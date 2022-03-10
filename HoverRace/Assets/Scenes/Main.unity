@@ -2158,7 +2158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d77ff6c70ee8a6843aadd6d42c0f4465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MouseSensitivity: 1
+  MouseSensitivity: 3
 --- !u!4 &668006949
 Transform:
   m_ObjectHideFlags: 0
