@@ -32,12 +32,14 @@ public class playerHoverControll : MonoBehaviour
         private Rigidbody _rigidbody;
         private float _upForce = 1;
         private bool _stabilizing;
+        private GameManager gameManager;
         #endregion
 
     private void Awake()
     {   
         shipSound.Play();
         _rigidbody = GetComponent<Rigidbody>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Start()
@@ -143,7 +145,7 @@ public class playerHoverControll : MonoBehaviour
         }
         
         
-        _rigidbody.AddTorque(orientation.up.normalized * Input.GetAxisRaw("Mouse X") * rotSpeed);
+        _rigidbody.AddTorque(orientation.up.normalized * Input.GetAxisRaw("Mouse X") * rotSpeed * gameManager.MouseSensitivity);
 
         if (_inAir && !_stabilizing)
         {
