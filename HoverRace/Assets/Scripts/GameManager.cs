@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     public float MouseSensitivity = 1f;
     
     
-    void Start () {
+    void Start ()
+    {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }

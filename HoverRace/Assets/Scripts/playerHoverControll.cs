@@ -9,7 +9,6 @@ public class playerHoverControll : MonoBehaviour
 {
     [Header("Hoverboard Properties")]
     [SerializeField] private float speed = 2;
-    [SerializeField] private float rotSpeed = 10f;
     [SerializeField] private float levelForce = 150f;
     [SerializeField] private float hoverDist = 1;
     [SerializeField] private float stability = 0.3f;
@@ -145,7 +144,7 @@ public class playerHoverControll : MonoBehaviour
         }
         
         
-        _rigidbody.AddTorque(orientation.up.normalized * (Input.GetAxisRaw("Mouse X") * gameManager.MouseSensitivity) * rotSpeed);
+        _rigidbody.AddTorque(orientation.up.normalized * (Input.GetAxisRaw("Mouse X") * gameManager.MouseSensitivity));
 
         if (_inAir && !_stabilizing)
         {
