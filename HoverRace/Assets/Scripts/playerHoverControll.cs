@@ -145,7 +145,7 @@ public class playerHoverControll : MonoBehaviour
         }
         
         
-        _rigidbody.AddTorque(orientation.up.normalized * Input.GetAxisRaw("Mouse X") * rotSpeed * gameManager.MouseSensitivity);
+        _rigidbody.AddTorque(orientation.up.normalized * (Input.GetAxisRaw("Mouse X") * gameManager.MouseSensitivity) * rotSpeed);
 
         if (_inAir && !_stabilizing)
         {
