@@ -1,19 +1,14 @@
 fileFormatVersion: 2
-guid: 6a08fff0a4eab4c4ea0dee24bb900990
+guid: 1a494c8cd95b4084c845121f14af3d73
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Artboard 1-100
-    second: {fileID: 2800000, guid: 0f1eb4e32d31ac94d9ae283f3e9256d7, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
