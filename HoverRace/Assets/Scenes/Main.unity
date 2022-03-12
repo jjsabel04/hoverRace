@@ -162,7 +162,7 @@ MonoBehaviour:
   stability: 0.3
   stabilitySpeed: 2
   boostSpeed: 2
-  boostDelay: 2
+  boostDelay: 1
   engineAcceleration: 10
   minEngineSound: 0.1
   maxEngineSound: 0.6
