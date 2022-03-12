@@ -202,8 +202,8 @@ public class playerHoverControll : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
-            _rigidbody.drag = 15;
-            _rigidbody.angularDrag = 15;
+            // _rigidbody.drag = 15;
+            // _rigidbody.angularDrag = 15;
             // StartCoroutine(Boost());
             _rigidbody.AddTorque(orientation.forward.normalized * speed * boostSpeed);
         }
