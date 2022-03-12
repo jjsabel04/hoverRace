@@ -2210,7 +2210,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 102950681}
   m_Follow: {fileID: 102950681}
   m_Lens:
-    FieldOfView: 45
+    FieldOfView: 70
     OrthographicSize: 10
     NearClipPlane: 0.01
     FarClipPlane: 5000
@@ -3122,7 +3122,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5e88a93148f69984e968ecc92408960f, type: 2}
+  - {fileID: 2100000, guid: 981abf7a53e6a964fba6bc48555ec31a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3770,7 +3770,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 5000
-  field of view: 45
+  field of view: 70
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
