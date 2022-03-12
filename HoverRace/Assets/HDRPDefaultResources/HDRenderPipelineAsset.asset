@@ -16,7 +16,7 @@ MonoBehaviour:
   m_RenderPipelineRayTracingResources: {fileID: 0}
   m_DefaultVolumeProfile: {fileID: 11400000, guid: cdf0ed83bf51c794186c8cf49e3736ee, type: 2}
   m_LensAttenuation: 0
-  m_DefaultLookDevProfile: {fileID: 0}
+  m_DefaultLookDevProfile: {fileID: 11400000, guid: 9b7a9988e1dc68142903b19e1f46d5f5, type: 2}
   m_RenderingPathDefaultCameraFrameSettings:
     bitDatas:
       data1: 72198262773251917
