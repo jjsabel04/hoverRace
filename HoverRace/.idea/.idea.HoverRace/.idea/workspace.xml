@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c0345bd-8bd7-4a1d-9765-466a62b9f7ad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/protohovproductiontest.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/protohovproductiontest.fbx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/protohovproductiontest.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/protohovproductiontest.fbx.meta" afterDir="false" />
-    </list>
+    <list default="true" id="7c0345bd-8bd7-4a1d-9765-466a62b9f7ad" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,7 +72,7 @@
       <workItem from="1646735367308" duration="1349000" />
       <workItem from="1646739495698" duration="778000" />
       <workItem from="1646926917022" duration="2884000" />
-      <workItem from="1647081338816" duration="3948000" />
+      <workItem from="1647081338816" duration="4338000" />
     </task>
     <servers />
   </component>
