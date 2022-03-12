@@ -13,6 +13,8 @@ public class playerHoverControll : MonoBehaviour
     [SerializeField] private float hoverDist = 1;
     [SerializeField] private float stability = 0.3f;
     [SerializeField] private float stabilitySpeed = 2.0f;
+    [SerializeField] private float boostSpeed = 2.0f;
+    [SerializeField] private float boostDelay = 2.0f;
     [Header("Sound")]
     [SerializeField] private float engineAcceleration = 10f;
     [SerializeField] private float minEngineSound = .05f;
@@ -62,9 +64,9 @@ public class playerHoverControll : MonoBehaviour
         }
         HandleAudio();
      }
-    
+     
 
-     private void FixedUpdate()
+    void FixedUpdate()
     {
         HandleInputAndHovering();
     }
@@ -197,5 +199,20 @@ public class playerHoverControll : MonoBehaviour
             }
         }
 
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            _rigidbody.drag = 15;
+            _rigidbody.angularDrag = 15;
+            StartCoroutine(Boost());
+            _rigidbody.AddTorque(orientation.forward.normalized * speed * boostSpeed);
+        }
+
+        IEnumerator Boost()
+        {
+            yield return new WaitForSeconds(boostDelay);
+            _rigidbody.drag = 7;
+            _rigidbody.angularDrag = 7;
+        }
     }
 }

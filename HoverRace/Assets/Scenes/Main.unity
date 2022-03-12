@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2023.5391, g: 1956.3711, b: 2302.586, a: 1}
+  m_IndirectSpecularColor: {r: 2023.5391, g: 1956.3477, b: 2302.5781, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -161,6 +161,8 @@ MonoBehaviour:
   hoverDist: 1.5
   stability: 0.3
   stabilitySpeed: 2
+  boostSpeed: 2
+  boostDelay: 2
   engineAcceleration: 10
   minEngineSound: 0.1
   maxEngineSound: 0.6
