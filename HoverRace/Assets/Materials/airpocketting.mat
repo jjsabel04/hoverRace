@@ -179,10 +179,10 @@ Material:
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
     - _SPECULAR_ANISOTROPY: 0
-    - _SPECULAR_IOR: 1.5
+    - _SPECULAR_IOR: 0
     - _SPECULAR_ROTATION: 0
-    - _SPECULAR_ROUGHNESS: 0.2
-    - _SPECULAR_WEIGHT: 0.214
+    - _SPECULAR_ROUGHNESS: 0
+    - _SPECULAR_WEIGHT: 0
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
@@ -227,7 +227,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - _BASE_COLOR: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    - _BASE_COLOR: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _COAT_COLOR: {r: 1, g: 1, b: 1, a: 1}

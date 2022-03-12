@@ -62,16 +62,7 @@ public class playerHoverControll : MonoBehaviour
         }
         HandleAudio();
      }
-
-     private void Update()
-     {
-         /*
-         if (_rigidbody.velocity.magnitude > maxSpeed)
-         {
-             _rigidbody.velocity = _rigidbody.velocity.normalized * maxSpeed;
-         }
-         */
-     }
+    
 
      private void FixedUpdate()
     {
@@ -153,22 +144,22 @@ public class playerHoverControll : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 //_rigidbody.AddForce(orientation.forward.normalized * speed);
-                MovementFB = transform.forward;
+                MovementFB += transform.forward;
             }
             if (Input.GetKey(KeyCode.A))
             {
                 //_rigidbody.AddForce(orientation.right.normalized * -speed);
-                MovementLR = -transform.right;
+                MovementLR += -transform.right;
             }
             if (Input.GetKey(KeyCode.S))
             {
                 //_rigidbody.AddForce(orientation.forward.normalized * -speed);
-                MovementFB = -transform.forward;
+                MovementFB += -transform.forward;
             }
             if (Input.GetKey(KeyCode.D))
             {
                 //_rigidbody.AddForce(orientation.right.normalized * speed);
-                MovementLR = transform.right;
+                MovementLR += transform.right;
             }
             
             _rigidbody.AddForce((MovementFB + MovementLR).normalized * speed);

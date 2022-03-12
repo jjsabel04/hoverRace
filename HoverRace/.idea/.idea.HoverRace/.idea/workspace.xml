@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c0345bd-8bd7-4a1d-9765-466a62b9f7ad" name="Changes" comment="" />
+    <list default="true" id="7c0345bd-8bd7-4a1d-9765-466a62b9f7ad" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/playerHoverControll.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/playerHoverControll.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/source.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/source/Body.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/source/Body.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/source/Glass.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/source/Glass.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/source/LamborghiniJarama.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/source/LamborghiniJarama/LamborghiniJarama.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/source/LamborghiniJarama/LamborghiniJarama.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/source/Metal.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/source/Metal.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/source/rear Lights.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/source/rear Lights.mat.meta" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,7 +87,7 @@
       <workItem from="1646735367308" duration="1349000" />
       <workItem from="1646739495698" duration="778000" />
       <workItem from="1646926917022" duration="2884000" />
-      <workItem from="1647081338816" duration="4338000" />
+      <workItem from="1647081338816" duration="4945000" />
     </task>
     <servers />
   </component>
