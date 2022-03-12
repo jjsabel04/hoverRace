@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c0345bd-8bd7-4a1d-9765-466a62b9f7ad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HoverRace/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HoverRace/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/playerHoverControll.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/playerHoverControll.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +75,7 @@
       <workItem from="1646735367308" duration="1349000" />
       <workItem from="1646739495698" duration="778000" />
       <workItem from="1646926917022" duration="2884000" />
-      <workItem from="1647081338816" duration="1899000" />
+      <workItem from="1647081338816" duration="2907000" />
     </task>
     <servers />
   </component>

@@ -32,7 +32,8 @@ public class playerHoverControll : MonoBehaviour
         private float _upForce = 1;
         private bool _stabilizing;
         private GameManager gameManager;
-        private Vector3 movementSpeed;
+        private Vector3 MovementFB;
+        private Vector3 MovementLR;
         #endregion
 
     private void Awake()
@@ -131,29 +132,30 @@ public class playerHoverControll : MonoBehaviour
         {
             _rigidbody.drag = 7;
             _rigidbody.angularDrag = 7;
-            movementSpeed = new Vector3(0, 0, 0);
+            MovementFB = Vector3.zero;
+            MovementLR = Vector3.zero;
             if (Input.GetKey(KeyCode.W))
             {
                 //_rigidbody.AddForce(orientation.forward.normalized * speed);
-                movementSpeed = transform.forward * speed;
+                MovementFB = transform.forward;
             }
             if (Input.GetKey(KeyCode.A))
             {
                 //_rigidbody.AddForce(orientation.right.normalized * -speed);
-                movementSpeed = transform.right * -speed;
+                MovementLR = -transform.right;
             }
             if (Input.GetKey(KeyCode.S))
             {
                 //_rigidbody.AddForce(orientation.forward.normalized * -speed);
-                movementSpeed = transform.forward * -speed;
+                MovementFB = -transform.forward;
             }
             if (Input.GetKey(KeyCode.D))
             {
                 //_rigidbody.AddForce(orientation.right.normalized * speed);
-                movementSpeed = transform.right * speed;
+                MovementLR = transform.right;
             }
             
-            _rigidbody.AddForce(movementSpeed.normalized);
+            _rigidbody.AddForce((MovementFB + MovementLR).normalized * speed);
             
             
             
