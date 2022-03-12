@@ -32,6 +32,8 @@ public class playerHoverControll : MonoBehaviour
         private float _upForce = 1;
         private bool _stabilizing;
         private GameManager gameManager;
+        private Vector3 MovementFB;
+        private Vector3 MovementLR;
         #endregion
 
     private void Awake()
@@ -59,9 +61,18 @@ public class playerHoverControll : MonoBehaviour
         }
         HandleAudio();
      }
-    
 
-    private void FixedUpdate()
+     private void Update()
+     {
+         /*
+         if (_rigidbody.velocity.magnitude > maxSpeed)
+         {
+             _rigidbody.velocity = _rigidbody.velocity.normalized * maxSpeed;
+         }
+         */
+     }
+
+     private void FixedUpdate()
     {
         HandleInputAndHovering();
     }
@@ -94,6 +105,7 @@ public class playerHoverControll : MonoBehaviour
 
     void HandleInputAndHovering()
     {
+
         _groundLevel = false;
         _inAir = false;
         for (int i = 0; i < 4; i++)
@@ -120,22 +132,33 @@ public class playerHoverControll : MonoBehaviour
         {
             _rigidbody.drag = 7;
             _rigidbody.angularDrag = 7;
+            MovementFB = Vector3.zero;
+            MovementLR = Vector3.zero;
             if (Input.GetKey(KeyCode.W))
             {
-                _rigidbody.AddForce(orientation.forward.normalized * speed);
+                //_rigidbody.AddForce(orientation.forward.normalized * speed);
+                MovementFB = transform.forward;
             }
             if (Input.GetKey(KeyCode.A))
             {
-                _rigidbody.AddForce(orientation.right.normalized * -speed);
+                //_rigidbody.AddForce(orientation.right.normalized * -speed);
+                MovementLR = -transform.right;
             }
             if (Input.GetKey(KeyCode.S))
             {
-                _rigidbody.AddForce(orientation.forward.normalized * -speed);
+                //_rigidbody.AddForce(orientation.forward.normalized * -speed);
+                MovementFB = -transform.forward;
             }
             if (Input.GetKey(KeyCode.D))
             {
-                _rigidbody.AddForce(orientation.right.normalized * speed);
+                //_rigidbody.AddForce(orientation.right.normalized * speed);
+                MovementLR = transform.right;
             }
+            
+            _rigidbody.AddForce((MovementFB + MovementLR).normalized * speed);
+            
+            
+            
         }
         else
         {
@@ -166,5 +189,6 @@ public class playerHoverControll : MonoBehaviour
                 _rigidbody.AddTorque(orientation.forward.normalized * -speed);
             }
         }
+
     }
 }
