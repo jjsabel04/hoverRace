@@ -34,6 +34,7 @@ public class playerHoverControll : MonoBehaviour
         private GameManager gameManager;
         private Vector3 MovementFB;
         private Vector3 MovementLR;
+        private float jumpForce;
         #endregion
 
     private void Awake()
@@ -108,24 +109,39 @@ public class playerHoverControll : MonoBehaviour
 
         _groundLevel = false;
         _inAir = false;
-        for (int i = 0; i < 4; i++)
+        if(!Input.GetKey(KeyCode.Space))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(corners.GetChild(i).position, transform.TransformDirection(Vector3.down), out hit, hoverDist + 3))
+            if (jumpForce > 1)
             {
-                if(hit.distance < hoverDist)
-                {
-                    Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
-                    _upForce = (hoverDist - hit.distance) * levelForce;
-                    _rigidbody.AddForceAtPosition(Vector3.up * _upForce, corners.GetChild(i).position);
-                    _groundLevel = true;
-                }
+                jumpForce -= 0.1f;
             }
             else
             {
-                Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hoverDist, Color.white);
-                _inAir = true;
+                jumpForce = 1;
             }
+            for (int i = 0; i < 4; i++)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(corners.GetChild(i).position, transform.TransformDirection(Vector3.down), out hit, hoverDist + 3))
+                {
+                    if(hit.distance < hoverDist)
+                    {
+                        Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
+                        _upForce = (hoverDist - hit.distance) * levelForce;
+                        _rigidbody.AddForceAtPosition(transform.up * _upForce * jumpForce, corners.GetChild(i).position);
+                        _groundLevel = true;
+                    }
+                }
+                else
+                {
+                    Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hoverDist, Color.white);
+                    _inAir = true;
+                }
+            }
+        }
+        else if (jumpForce/7 < .6f)
+        {
+            jumpForce += Time.deltaTime * 7;
         }
 
         if (_groundLevel)
