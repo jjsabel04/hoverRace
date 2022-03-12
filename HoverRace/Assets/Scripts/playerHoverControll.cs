@@ -13,6 +13,7 @@ public class playerHoverControll : MonoBehaviour
     [SerializeField] private float hoverDist = 1;
     [SerializeField] private float stability = 0.3f;
     [SerializeField] private float stabilitySpeed = 2.0f;
+    [SerializeField] private float maxSpeed = 50f;
     [Header("Sound")]
     [SerializeField] private float engineAcceleration = 10f;
     [SerializeField] private float minEngineSound = .05f;
@@ -94,6 +95,12 @@ public class playerHoverControll : MonoBehaviour
 
     void HandleInputAndHovering()
     {
+
+        if (_rigidbody.velocity.magnitude > maxSpeed)
+        {
+            _rigidbody.velocity = _rigidbody.velocity.normalized * maxSpeed;
+        }
+        
         _groundLevel = false;
         _inAir = false;
         for (int i = 0; i < 4; i++)
