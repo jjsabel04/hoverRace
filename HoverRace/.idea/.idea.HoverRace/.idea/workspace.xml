@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c0345bd-8bd7-4a1d-9765-466a62b9f7ad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/playerHoverControll.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/playerHoverControll.cs" afterDir="false" />
-    </list>
+    <list default="true" id="7c0345bd-8bd7-4a1d-9765-466a62b9f7ad" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f7f0a900fdf94a2a9316bb3d4c5aa3e8144200/a2/4b19359a/Component.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -78,6 +73,7 @@
       <workItem from="1646739495698" duration="778000" />
       <workItem from="1646926917022" duration="2884000" />
       <workItem from="1647081338816" duration="7138000" />
+      <workItem from="1647685736694" duration="3511000" />
     </task>
     <servers />
   </component>
