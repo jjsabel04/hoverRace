@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2156.7686, g: 2222.9082, b: 3168.9727, a: 1}
+  m_IndirectSpecularColor: {r: 2155.6982, g: 2222.0938, b: 3168.4258, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1350,10 +1350,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yawSegment: {fileID: 746907002}
   pitchSegment: {fileID: 929620352}
-  yawSpeed: 60
-  pitchSpeed: 60
+  yawSpeed: 30
+  pitchSpeed: 30
   yawLimit: 360
-  pitchLimit: 30
+  pitchLimit: 360
   TargetObj: {fileID: 102950681}
 --- !u!1 &330389179
 GameObject:
@@ -1402,10 +1402,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yawSegment: {fileID: 492159804}
   pitchSegment: {fileID: 1409884018}
-  yawSpeed: 60
-  pitchSpeed: 60
+  yawSpeed: 30
+  pitchSpeed: 30
   yawLimit: 360
-  pitchLimit: 30
+  pitchLimit: 360
   TargetObj: {fileID: 102950681}
 --- !u!1 &337693036
 GameObject:
@@ -2223,10 +2223,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yawSegment: {fileID: 1318902201}
   pitchSegment: {fileID: 448335531}
-  yawSpeed: 60
-  pitchSpeed: 60
+  yawSpeed: 30
+  pitchSpeed: 30
   yawLimit: 360
-  pitchLimit: 30
+  pitchLimit: 360
   TargetObj: {fileID: 102950681}
 --- !u!1 &432432459
 GameObject:
@@ -2356,10 +2356,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yawSegment: {fileID: 1088069362}
   pitchSegment: {fileID: 1468234542}
-  yawSpeed: 60
-  pitchSpeed: 60
+  yawSpeed: 30
+  pitchSpeed: 30
   yawLimit: 360
-  pitchLimit: 30
+  pitchLimit: 360
   TargetObj: {fileID: 102950681}
 --- !u!1 &485959221
 GameObject:
@@ -3262,10 +3262,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yawSegment: {fileID: 379235347}
   pitchSegment: {fileID: 1443857017}
-  yawSpeed: 60
-  pitchSpeed: 60
+  yawSpeed: 30
+  pitchSpeed: 30
   yawLimit: 360
-  pitchLimit: 30
+  pitchLimit: 360
   TargetObj: {fileID: 102950681}
 --- !u!1 &583976649
 GameObject:
@@ -7518,10 +7518,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yawSegment: {fileID: 785451179}
   pitchSegment: {fileID: 836416026}
-  yawSpeed: 60
-  pitchSpeed: 60
+  yawSpeed: 30
+  pitchSpeed: 30
   yawLimit: 360
-  pitchLimit: 30
+  pitchLimit: 360
   TargetObj: {fileID: 102950681}
 --- !u!1 &1527166393
 GameObject:
@@ -7757,10 +7757,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yawSegment: {fileID: 1791291775}
   pitchSegment: {fileID: 1398701730}
-  yawSpeed: 60
-  pitchSpeed: 60
+  yawSpeed: 30
+  pitchSpeed: 30
   yawLimit: 360
-  pitchLimit: 30
+  pitchLimit: 360
   TargetObj: {fileID: 102950681}
 --- !u!1 &1607714657
 GameObject:
@@ -9434,10 +9434,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yawSegment: {fileID: 1841326854}
   pitchSegment: {fileID: 2100012405}
-  yawSpeed: 60
-  pitchSpeed: 60
+  yawSpeed: 30
+  pitchSpeed: 30
   yawLimit: 360
-  pitchLimit: 30
+  pitchLimit: 360
   TargetObj: {fileID: 102950681}
 --- !u!1 &1919695868
 GameObject:
@@ -11685,10 +11685,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yawSegment: {fileID: 6942550697830192355}
   pitchSegment: {fileID: 6942550697830192931}
-  yawSpeed: 60
-  pitchSpeed: 60
+  yawSpeed: 30
+  pitchSpeed: 30
   yawLimit: 360
-  pitchLimit: 30
+  pitchLimit: 360
   TargetObj: {fileID: 102950681}
 --- !u!114 &6942550697840140467
 MonoBehaviour:
