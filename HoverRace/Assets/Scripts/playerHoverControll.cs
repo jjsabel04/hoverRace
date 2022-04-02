@@ -13,8 +13,6 @@ public class playerHoverControll : MonoBehaviour
     [SerializeField] private float hoverDist = 1;
     [SerializeField] private float stability = 0.3f;
     [SerializeField] private float stabilitySpeed = 2.0f;
-    [SerializeField] private float boostSpeed = 2.0f;
-    [SerializeField] private float boostDelay = 2.0f;
     [Header("Sound")]
     [SerializeField] private float engineAcceleration = 10f;
     [SerializeField] private float minEngineSound = .05f;
@@ -25,6 +23,8 @@ public class playerHoverControll : MonoBehaviour
     [Header("Hoverboard Points")]
     [SerializeField] private Transform corners;
     [SerializeField] private Transform orientation;
+
+    [SerializeField] private int currentPoints;
 
 
     #region Private Vars
@@ -37,6 +37,7 @@ public class playerHoverControll : MonoBehaviour
         private Vector3 MovementFB;
         private Vector3 MovementLR;
         private float jumpForce;
+        private bool upRight;
         #endregion
 
     private void Awake()
@@ -112,29 +113,30 @@ public class playerHoverControll : MonoBehaviour
             {
                 jumpForce = 1;
             }
-            for (int i = 0; i < 4; i++)
-            {
-                RaycastHit hit;
-                if (Physics.Raycast(corners.GetChild(i).position, transform.TransformDirection(Vector3.down), out hit, hoverDist + 3))
-                {
-                    if(hit.distance < hoverDist)
-                    {
-                        Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
-                        _upForce = (hoverDist - hit.distance) * levelForce;
-                        _rigidbody.AddForceAtPosition(transform.up * _upForce * jumpForce, corners.GetChild(i).position);
-                        _groundLevel = true;
-                    }
-                }
-                else
-                {
-                    Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hoverDist, Color.white);
-                    _inAir = true;
-                }
-            }
         }
         else if (jumpForce/7 < .6f)
         {
             jumpForce += Time.deltaTime * 7;
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(corners.GetChild(i).position, transform.TransformDirection(Vector3.down), out hit, hoverDist + 3))
+            {
+                if(hit.distance < hoverDist && !Input.GetKey(KeyCode.Space))
+                {
+                    Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
+                    _upForce = (hoverDist - hit.distance) * levelForce;
+                    _rigidbody.AddForceAtPosition(transform.up * _upForce * jumpForce, corners.GetChild(i).position);
+                    _groundLevel = true;
+                    upRight = true;
+                }
+            }
+            else
+            {
+                Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hoverDist, Color.white);
+                _inAir = true;
+            }
         }
 
         if (_groundLevel)
@@ -178,41 +180,51 @@ public class playerHoverControll : MonoBehaviour
         
         _rigidbody.AddTorque(orientation.up.normalized * Input.GetAxisRaw("Mouse X") * gameManager.MouseSensitivity);
 
-        if (_inAir && !_stabilizing)
+        if (_inAir) // trick controlls
         {
+            if(!_stabilizing)
+            {
+                if (Input.GetKey(KeyCode.W))
+                {
+                    _rigidbody.AddTorque(orientation.right.normalized * speed);
+                }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    _rigidbody.AddTorque(orientation.forward.normalized * speed);
+                }
+                if (Input.GetKey(KeyCode.S))
+                {
+                    _rigidbody.AddTorque(orientation.right.normalized * -speed);
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    _rigidbody.AddTorque(orientation.forward.normalized * -speed);
+                }
+            }
+
+            if(upRight && (transform.localEulerAngles.z <= 210 && transform.localEulerAngles.z >= 150))
+            {
+                currentPoints += 10;
+                Debug.Log(currentPoints);
+                upRight = false;
+            }
+            if(!upRight && (transform.localEulerAngles.z <= 30 || transform.localEulerAngles.z >= 330))
+            {
+                currentPoints += 10;
+                Debug.Log(currentPoints);
+                upRight = true;
+            }
             
-            if (Input.GetKey(KeyCode.W))
-            {
-                _rigidbody.AddTorque(orientation.right.normalized * speed);
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                _rigidbody.AddTorque(orientation.forward.normalized * speed);
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                _rigidbody.AddTorque(orientation.right.normalized * -speed);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                _rigidbody.AddTorque(orientation.forward.normalized * -speed);
-            }
         }
 
 
-        // if (Input.GetMouseButton(1))
-        // {
-        //     // _rigidbody.drag = 15;
-        //     // _rigidbody.angularDrag = 15;
-        //     // StartCoroutine(Boost());
-        //     _rigidbody.AddForce(orientation.forward.normalized * speed * boostSpeed);
-        // }
-
-        IEnumerator Boost()
+        if (Input.GetMouseButton(1))
         {
-            yield return new WaitForSeconds(boostDelay);
-            _rigidbody.drag = 7;
-            _rigidbody.angularDrag = 7;
+            // _rigidbody.drag = 15;
+            // _rigidbody.angularDrag = 15;
+            currentPoints = 0;
+            // StartCoroutine(Boost());
+            //_rigidbody.AddForce(orientation.forward.normalized * speed * boostSpeed);
         }
     }
 }
