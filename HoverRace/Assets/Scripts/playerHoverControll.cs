@@ -24,7 +24,11 @@ public class playerHoverControll : MonoBehaviour
     [SerializeField] private Transform corners;
     [SerializeField] private Transform orientation;
 
-    [SerializeField] private int currentPoints;
+    [SerializeField] private float currentPoints;
+
+    [SerializeField] private bool onRail;
+    [SerializeField] private GameObject rail;
+    [SerializeField] private float timeOnRail;
 
 
     #region Private Vars
@@ -38,6 +42,7 @@ public class playerHoverControll : MonoBehaviour
         private Vector3 MovementLR;
         private float jumpForce;
         private bool upRight;
+        private int rotDecrease;
         #endregion
 
     private void Awake()
@@ -54,6 +59,7 @@ public class playerHoverControll : MonoBehaviour
    
      private void LateUpdate ()
      {
+        HandleStabalisation();
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
         {
             _stabilizing = true;
@@ -103,6 +109,33 @@ public class playerHoverControll : MonoBehaviour
 
         _groundLevel = false;
         _inAir = false;
+        onRail = false;
+        rotDecrease = 1;
+
+        if(Input.GetKey(KeyCode.Space))
+        {
+            Collider[] nearHover = Physics.OverlapBox(transform.position,transform.localScale*1.5f,transform.rotation);
+            if (nearHover.Length > 0)
+            {
+                for (int i = 0; i < nearHover.Length; i++)
+                {
+                    if (nearHover[i].tag == "rail")
+                    {
+                        onRail = true;
+                        rail = nearHover[i].gameObject;
+                        _rigidbody.angularDrag = 20;
+                        rotDecrease = 40;
+                        timeOnRail += Time.deltaTime * 5;
+                        currentPoints = Mathf.FloorToInt(timeOnRail);
+                    }
+                }
+            }
+        }
+        if(!onRail)
+        {
+            timeOnRail = 0;
+        }
+
         if(!Input.GetKey(KeyCode.Space))
         {
             if (jumpForce > 1)
@@ -118,12 +151,13 @@ public class playerHoverControll : MonoBehaviour
         {
             jumpForce += Time.deltaTime * 7;
         }
+
         for (int i = 0; i < 4; i++)
         {
             RaycastHit hit;
             if (Physics.Raycast(corners.GetChild(i).position, transform.TransformDirection(Vector3.down), out hit, hoverDist + 3))
             {
-                if(hit.distance < hoverDist && !Input.GetKey(KeyCode.Space))
+                if(hit.distance < hoverDist && !Input.GetKey(KeyCode.Space) && hit.transform.gameObject.tag != "rail")
                 {
                     Debug.DrawRay(corners.GetChild(i).position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
                     _upForce = (hoverDist - hit.distance) * levelForce;
@@ -166,12 +200,24 @@ public class playerHoverControll : MonoBehaviour
                 MovementLR += transform.right;
             }
             
-            _rigidbody.AddForce((MovementFB + MovementLR).normalized * speed);
+            if (currentPoints > 0)
+            {
+                //_rigidbody.AddForce();
+                currentPoints -= Time.deltaTime * 15;
+            }
+            else
+            {
+                currentPoints = 0;
+            }
+
+
+
+            _rigidbody.AddForce((MovementFB + MovementLR).normalized * speed * (currentPoints / 65 + 1));
             
             
             
         }
-        else
+        else if(!onRail)
         {
             _rigidbody.drag = 0;
             _rigidbody.angularDrag = 3;
@@ -180,38 +226,36 @@ public class playerHoverControll : MonoBehaviour
         
         _rigidbody.AddTorque(orientation.up.normalized * Input.GetAxisRaw("Mouse X") * gameManager.MouseSensitivity);
 
-        if (_inAir) // trick controlls
+        if (_inAir || onRail) // trick controlls
         {
             if(!_stabilizing)
             {
                 if (Input.GetKey(KeyCode.W))
                 {
-                    _rigidbody.AddTorque(orientation.right.normalized * speed);
+                    _rigidbody.AddTorque(orientation.right.normalized * speed / rotDecrease);
                 }
                 if (Input.GetKey(KeyCode.A))
                 {
-                    _rigidbody.AddTorque(orientation.forward.normalized * speed);
+                    _rigidbody.AddTorque(orientation.forward.normalized * speed / rotDecrease);
                 }
                 if (Input.GetKey(KeyCode.S))
                 {
-                    _rigidbody.AddTorque(orientation.right.normalized * -speed);
+                    _rigidbody.AddTorque(orientation.right.normalized * -speed / rotDecrease);
                 }
                 if (Input.GetKey(KeyCode.D))
                 {
-                    _rigidbody.AddTorque(orientation.forward.normalized * -speed);
+                    _rigidbody.AddTorque(orientation.forward.normalized * -speed / rotDecrease);
                 }
             }
 
             if(upRight && (transform.localEulerAngles.z <= 210 && transform.localEulerAngles.z >= 150))
             {
                 currentPoints += 10;
-                Debug.Log(currentPoints);
                 upRight = false;
             }
             if(!upRight && (transform.localEulerAngles.z <= 30 || transform.localEulerAngles.z >= 330))
             {
                 currentPoints += 10;
-                Debug.Log(currentPoints);
                 upRight = true;
             }
             
@@ -225,6 +269,23 @@ public class playerHoverControll : MonoBehaviour
             currentPoints = 0;
             // StartCoroutine(Boost());
             //_rigidbody.AddForce(orientation.forward.normalized * speed * boostSpeed);
+        }
+
+
+
+
+        if (currentPoints > 85)
+        {
+            currentPoints = 85;
+        }
+        Debug.Log(currentPoints);
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if(!_groundLevel)
+        {
+            currentPoints = 0;
         }
     }
 }
