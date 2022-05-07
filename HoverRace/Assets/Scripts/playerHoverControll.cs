@@ -83,10 +83,10 @@ public class playerHoverControll : MonoBehaviour
         
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            Debug.Log("a");
+            //Debug.Log("a");
             if (!onRail)
             {
-                Debug.Log("b");
+                //Debug.Log("b");
                 prevOnRail = false;
             }
         }
@@ -241,7 +241,7 @@ public class playerHoverControll : MonoBehaviour
                 jumpForce -= 0.1f;
                 if(prevOnRail == true)
                 {
-                    Debug.Log(jumpForce);
+                    //Debug.Log(jumpForce);
                     _rigidbody.AddForce(transform.up * 200 * jumpForce);
                     jumpForce -= 0.03f;
                 }
@@ -318,7 +318,7 @@ public class playerHoverControll : MonoBehaviour
                 {
                     decel = 0;
                 }
-                Debug.Log(decel);
+                //Debug.Log(decel);
                 _rigidbody.AddForce(prevDir * decel);
             }
             else
@@ -415,7 +415,7 @@ public class playerHoverControll : MonoBehaviour
     {
         if(!_groundLevel && other.gameObject.tag != "rail")
         {
-            Debug.Log(other.gameObject.tag);
+            //Debug.Log(other.gameObject.tag);
             currentPoints = 0;
         }
         //Debug.Log(currentPoints);
