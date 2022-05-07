@@ -278,7 +278,7 @@ public class playerHoverControll : MonoBehaviour
         {
             currentPoints = 85;
         }
-        Debug.Log(currentPoints);
+        //Debug.Log(currentPoints);
     }
 
     void OnCollisionEnter(Collision other)

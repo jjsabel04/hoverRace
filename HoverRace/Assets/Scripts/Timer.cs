@@ -11,6 +11,8 @@ public class Timer : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
+        Debug.Log(Time.deltaTime);
+        Debug.Log(time);
         DisplayTime(time);
     }
     
@@ -18,8 +20,8 @@ public class Timer : MonoBehaviour
     {
         float minutes = Mathf.FloorToInt(timeToDisplay / 60); 
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        float milliseconds = timeToDisplay * 1000 * 0.1f;
-        text.text = $"{minutes:00}:{seconds:00}.<size=42.21>{milliseconds:0}";
+        float milliseconds = timeToDisplay % 1 * 10000;
+        text.text = $"{minutes:00}:{seconds:00}.<size=42.21>{milliseconds:0000}";
         
         
     }
