@@ -28,6 +28,7 @@ public class playerHoverControll : MonoBehaviour
 
     [SerializeField] private bool onRail;
     [SerializeField] private GameObject rail;
+    [SerializeField] private GameObject nearestRail;
     [SerializeField] private float timeOnRail;
 
 
@@ -106,7 +107,7 @@ public class playerHoverControll : MonoBehaviour
 
     void HandleInputAndHovering()
     {
-
+        nearestRail = null;
         _groundLevel = false;
         _inAir = false;
         onRail = false;
@@ -114,19 +115,40 @@ public class playerHoverControll : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space))
         {
-            Collider[] nearHover = Physics.OverlapBox(transform.position,transform.localScale*1.5f,transform.rotation);
-            if (nearHover.Length > 0)
+            Collider[] nearHover = Physics.OverlapBox(transform.position, transform.localScale*3f, transform.rotation);
+            if (nearHover.Length > 1)
             {
                 for (int i = 0; i < nearHover.Length; i++)
                 {
                     if (nearHover[i].tag == "rail")
                     {
-                        onRail = true;
-                        rail = nearHover[i].gameObject;
-                        _rigidbody.angularDrag = 20;
-                        rotDecrease = 40;
-                        timeOnRail += Time.deltaTime * 5;
-                        currentPoints = Mathf.FloorToInt(timeOnRail);
+                        nearestRail = nearHover[i].gameObject;
+                    }
+                }
+                if(nearestRail != null)
+                {
+                    Vector3 closestPoint = nearestRail.transform.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+                    Vector3 directionVector = (closestPoint - transform.position).normalized;
+                    _rigidbody.AddForce (directionVector * 1000);
+                    //transform.position = closestPoint;
+
+
+
+                    nearHover = Physics.OverlapBox(transform.position, transform.localScale*1.5f, transform.rotation);
+                    if (nearHover.Length > 1)
+                    {
+                        for (int i = 0; i < nearHover.Length; i++)
+                        {
+                            if (nearHover[i].tag == "rail")
+                            {
+                                onRail = true;
+                                rail = nearHover[i].gameObject;
+                                _rigidbody.angularDrag = 20;
+                                rotDecrease = 40;
+                                timeOnRail += Time.deltaTime * 5;
+                                currentPoints = Mathf.FloorToInt(timeOnRail);
+                            }
+                        }
                     }
                 }
             }
@@ -278,7 +300,7 @@ public class playerHoverControll : MonoBehaviour
         {
             currentPoints = 85;
         }
-        //Debug.Log(currentPoints);
+        Debug.Log(currentPoints);
     }
 
     void OnCollisionEnter(Collision other)
