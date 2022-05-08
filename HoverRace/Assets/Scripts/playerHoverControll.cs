@@ -182,7 +182,7 @@ public class playerHoverControll : MonoBehaviour
                             if (prevOnRail == false)
                             {
                                 transform.position = closestPoint;
-                                timeOnRail = currentPoints;
+                                //timeOnRail = currentPoints;
                                 prevOnRail = true;
                             }
                         }
@@ -201,8 +201,9 @@ public class playerHoverControll : MonoBehaviour
                         _rigidbody.drag = 10;
                         _rigidbody.angularDrag = 20;
                         rotDecrease = 40;
-                        timeOnRail += Time.deltaTime * 5;
-                        currentPoints = Mathf.FloorToInt(timeOnRail);
+                        //timeOnRail += Time.deltaTime * 5;
+                        //currentPoints = Mathf.FloorToInt(timeOnRail);
+                        currentPoints += Time.deltaTime * 5;
                         
                         if(Mathf.Abs(_rigidbody.velocity.x) > 1f || Mathf.Abs(_rigidbody.velocity.z) > 1f)
                         {
@@ -313,7 +314,7 @@ public class playerHoverControll : MonoBehaviour
                     decel = speed;
                     startDecel = true;
                 }
-                decel -= Time.deltaTime * 10000;
+                decel -= Time.deltaTime * 20000;
                 if (decel < 0)
                 {
                     decel = 0;
@@ -325,7 +326,6 @@ public class playerHoverControll : MonoBehaviour
             {
                 prevDir = (MovementFB + MovementLR).normalized;
                 startDecel = false;
-                decel = 1;
             }
             /////////////////////////////////////////////////
 
@@ -340,8 +340,14 @@ public class playerHoverControll : MonoBehaviour
             }
 
 
-
-            _rigidbody.AddForce((MovementFB + MovementLR).normalized * speed * decel * (currentPoints / 65 + 1));
+            if (currentPoints >= 40)
+            {
+                _rigidbody.AddForce((MovementFB + MovementLR).normalized * speed * ((40f / 65f) + 1));
+            }
+            else
+            {
+                _rigidbody.AddForce((MovementFB + MovementLR).normalized * speed * (currentPoints / 65 + 1));
+            }
             
             
             
@@ -380,12 +386,12 @@ public class playerHoverControll : MonoBehaviour
 
             if(upRight && (transform.localEulerAngles.z <= 210 && transform.localEulerAngles.z >= 150))
             {
-                currentPoints += 10;
+                currentPoints += 8; // 5 flips for 40 points (max speed) and 11 for max time
                 upRight = false;
             }
             if(!upRight && (transform.localEulerAngles.z <= 30 || transform.localEulerAngles.z >= 330))
             {
-                currentPoints += 10;
+                currentPoints += 8;
                 upRight = true;
             }
             
@@ -408,7 +414,7 @@ public class playerHoverControll : MonoBehaviour
         {
             currentPoints = 85;
         }
-        //Debug.Log(currentPoints);
+        Debug.Log(currentPoints);
     }
 
     void OnCollisionEnter(Collision other)
