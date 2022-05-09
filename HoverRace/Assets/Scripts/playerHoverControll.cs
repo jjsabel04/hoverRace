@@ -30,7 +30,7 @@ public class playerHoverControll : MonoBehaviour
     [SerializeField] private bool prevOnRail;
     [SerializeField] private GameObject rail;
     [SerializeField] private GameObject nearestRail;
-    [SerializeField] private float timeOnRail;
+    //[SerializeField] private float timeOnRail;
 
     [SerializeField] private float decel;
     [SerializeField] private bool startDecel;
@@ -231,10 +231,10 @@ public class playerHoverControll : MonoBehaviour
                 }
             }
         }
-        if(!onRail)
-        {
-            timeOnRail = 0;
-        }
+        //if(!onRail)
+        //{
+        //    timeOnRail = 0;
+        //}
         if(!Input.GetKey(KeyCode.Space))
         {
             if (jumpForce > 1)
