@@ -6,12 +6,13 @@ public class radioManager : MonoBehaviour
 {
 
     private int currentRadio;
+    [Range(0,1)]public float maxRadioVolume;
 
     // Start is called before the first frame update
     void Start()
     {
         currentRadio = Random.Range(0,transform.childCount);
-        transform.GetChild(currentRadio).GetComponent<AudioSource>().volume = 1;
+        transform.GetChild(currentRadio).GetComponent<AudioSource>().volume = maxRadioVolume;
     }
 
     // Update is called once per frame
@@ -19,7 +20,7 @@ public class radioManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            transform.GetChild(currentRadio).GetComponent<AudioSource>().volume = 0;
+            transform.GetChild(currentRadio).GetComponent<AudioSource>().volume = maxRadioVolume;
             if (currentRadio-1 >= 0)
             {
                 currentRadio--;
@@ -41,7 +42,7 @@ public class radioManager : MonoBehaviour
             {
                 currentRadio = 0;
             }
-            transform.GetChild(currentRadio).GetComponent<AudioSource>().volume = 1;
+            transform.GetChild(currentRadio).GetComponent<AudioSource>().volume = maxRadioVolume;
         }
     }
 }
