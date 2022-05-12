@@ -13,6 +13,8 @@ public class playerHoverControll : MonoBehaviour
     [SerializeField] private float hoverDist = 1;
     [SerializeField] private float stability = 0.3f;
     [SerializeField] private float stabilitySpeed = 2.0f;
+    [SerializeField] private PhysicMaterial hoverOnPhysMat;
+    [SerializeField] private PhysicMaterial hoverOffPhysMat;
     [Header("Sound")]
     [SerializeField] private float engineAcceleration = 10f;
     [SerializeField] private float minEngineSound = .05f;
@@ -155,6 +157,7 @@ public class playerHoverControll : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space))
         {
+            transform.GetComponent<Collider>().material = hoverOffPhysMat;
             Collider[] nearHover = Physics.OverlapBox(transform.position, transform.localScale*2f, transform.rotation);
             if (nearHover.Length > 1)
             {
@@ -237,6 +240,7 @@ public class playerHoverControll : MonoBehaviour
         //}
         if(!Input.GetKey(KeyCode.Space))
         {
+            transform.GetComponent<Collider>().material = hoverOnPhysMat;
             if (jumpForce > 1)
             {
                 jumpForce -= 0.1f;
@@ -314,7 +318,7 @@ public class playerHoverControll : MonoBehaviour
                     decel = speed;
                     startDecel = true;
                 }
-                decel -= Time.deltaTime * 20000;
+                decel -= Time.deltaTime * 17500;
                 if (decel < 0)
                 {
                     decel = 0;

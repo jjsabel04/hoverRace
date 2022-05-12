@@ -456,6 +456,8 @@ MonoBehaviour:
   hoverDist: 1.5
   stability: 0.3
   stabilitySpeed: 2
+  hoverOnPhysMat: {fileID: 13400000, guid: 2a564559aa3b6ae44ad2fb3b0416e6d6, type: 2}
+  hoverOffPhysMat: {fileID: 13400000, guid: 73d1affaca5ce5b48bf568199e2c0964, type: 2}
   engineAcceleration: 10
   minEngineSound: 0.1
   maxEngineSound: 0.6
@@ -477,7 +479,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102950676}
-  m_Material: {fileID: 13400000, guid: 73d1affaca5ce5b48bf568199e2c0964, type: 2}
+  m_Material: {fileID: 13400000, guid: 2a564559aa3b6ae44ad2fb3b0416e6d6, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
