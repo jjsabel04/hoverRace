@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/sandBox.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
+  - enabled: 1
+    path: Assets/Scenes/demoTrack.unity
+    guid: 0fe2d208e0d46d849a9abf75f0830c0e
   m_configObjects: {}
