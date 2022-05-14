@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:HoverRace/Assets/Environment.meta
 guid: 5ab9670c6216f9542bc2ae76b9476512
 folderAsset: yes
+=======
+guid: 58f5b12195211de43aadc69d07385af3
+>>>>>>> Stashed changes:HoverRace/Assets/Scenes/demoTrack.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:HoverRace/Assets/Environment/Skybox.meta
 guid: dcd97dc0710de9844a224b709192068b
+=======
+guid: cdda9e5404e5d2a448bd3dc1d4ea6ad4
+>>>>>>> Stashed changes:HoverRace/Assets/Models/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
