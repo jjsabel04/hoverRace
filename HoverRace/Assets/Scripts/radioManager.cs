@@ -20,7 +20,7 @@ public class radioManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            transform.GetChild(currentRadio).GetComponent<AudioSource>().volume = maxRadioVolume;
+            transform.GetChild(currentRadio).GetComponent<AudioSource>().volume = 0;
             if (currentRadio-1 >= 0)
             {
                 currentRadio--;
@@ -29,7 +29,7 @@ public class radioManager : MonoBehaviour
             {
                 currentRadio = transform.childCount-1;
             }
-            transform.GetChild(currentRadio).GetComponent<AudioSource>().volume = 1;
+            transform.GetChild(currentRadio).GetComponent<AudioSource>().volume = maxRadioVolume;
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
